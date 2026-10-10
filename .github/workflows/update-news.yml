@@ -1,0 +1,48 @@
+name: Update STT World Watch
+
+on:
+  schedule:
+    - cron: '17 * * * *'
+    - cron: '23 6 1 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: stt-world-watch-update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - run: pip install -r requirements.txt
+
+      - name: Search foreign coverage
+        run: python scripts/update_news.py
+
+      - name: Monthly keepalive
+        if: github.event_name == 'schedule' && github.event.schedule == '23 6 1 * *'
+        run: |
+          date -u +'%Y-%m-%dT%H:%M:%SZ' > data/heartbeat.txt
+
+      - name: Commit only real data changes
+        run: |
+          git config user.name "stt-world-watch-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/articles.json data/status.json data/heartbeat.txt
+          if git diff --cached --quiet; then
+            echo "No persistent data changes — nothing to commit."
+          else
+            git commit -m "Update STT World Watch data"
+            git push
+          fi

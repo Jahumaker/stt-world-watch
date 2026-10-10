@@ -1,6 +1,6 @@
 # STT World Watch — GitHub Pages Free -versio
 
-Kevyt PWA-sovellus STT:n ulkomaisen uutisnäkyvyyden seurantaan. Käyttöliittymä on täysin staattinen ja toimii GitHub Pagesissa. Taustahaku ajetaan GitHub Actionsilla kerran tunnissa ja tulokset tallennetaan repositorion `data/articles.json`-tiedostoon.
+Kevyt PWA-sovellus STT:n ulkomaisen uutisnäkyvyyden seurantaan. Käyttöliittymä on täysin staattinen ja toimii GitHub Pagesissa. Taustahaku ajetaan GitHub Actionsilla kerran tunnissa ja tulokset tallennetaan repositorion `data/articles.json`-tiedostoon..
 
 Tämä versio on optimoitu **GitHub Free + julkinen repository + GitHub Pages** -käyttöön.
 

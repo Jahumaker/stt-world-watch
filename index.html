@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="fi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#111111" />
+  <meta name="description" content="STT:n ulkomaisen uutisnäkyvyyden seuranta" />
+  <title>STT World Watch</title>
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="icon" href="./assets/icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="./assets/icon-192.png" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <div class="eyebrow">STT ULKOMAAN UUTISSEURANTA</div>
+      <h1>STT WORLD WATCH</h1>
+    </div>
+    <button id="liveSearchBtn" class="button primary">Hae nyt</button>
+  </header>
+
+  <main>
+    <section class="status-grid" aria-label="Tilannekuva">
+      <div class="status-card wide">
+        <div class="label">TILANNE</div>
+        <div id="statusHeadline" class="status-headline">Ladataan…</div>
+        <div id="statusDetail" class="muted">Haetaan viimeisin tilannekuva.</div>
+      </div>
+      <div class="status-card">
+        <div class="label">VIIMEISIN DATAPÄIVITYS</div>
+        <div id="lastChecked" class="metric small">–</div>
+      </div>
+      <div class="status-card">
+        <div class="label">MAITA</div>
+        <div id="countryCount" class="metric">–</div>
+      </div>
+      <div class="status-card">
+        <div class="label">JULKAISUJA</div>
+        <div id="publicationCount" class="metric">–</div>
+      </div>
+      <div class="status-card">
+        <div class="label">24 H UUTTA</div>
+        <div id="new24Count" class="metric">–</div>
+      </div>
+    </section>
+
+    <nav class="tabs" aria-label="Näkymät">
+      <button class="tab active" data-view="latest">Uusimmat</button>
+      <button class="tab" data-view="countries">Maat</button>
+      <button class="tab" data-view="agencies">Uutistoimistot</button>
+      <button class="tab" data-view="timeline">Aikajana</button>
+    </nav>
+
+    <section class="toolbar">
+      <label class="search-wrap">
+        <span class="sr-only">Haku</span>
+        <input id="searchInput" type="search" placeholder="Hae mediasta, maasta tai otsikosta…" />
+      </label>
+      <select id="typeFilter" aria-label="Suodata tyypin mukaan">
+        <option value="">Kaikki tyypit</option>
+        <option>ORIGINAL</option>
+        <option>AGENCY</option>
+        <option>SYNDICATED</option>
+        <option>COMMENT</option>
+        <option>FOLLOW-UP</option>
+        <option>AGGREGATOR</option>
+      </select>
+    </section>
+
+    <div id="liveNotice" class="notice hidden"></div>
+    <section id="content" class="content" aria-live="polite"></section>
+  </main>
+
+  <footer>
+    <div>STT World Watch · GitHub Pages</div>
+    <div class="muted">Automaattinen haku GitHub Actionsilla. Live-haku käyttää GDELT DOC API:a.</div>
+  </footer>
+
+  <script src="./app.js" type="module"></script>
+</body>
+</html>
